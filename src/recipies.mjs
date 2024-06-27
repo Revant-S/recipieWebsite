@@ -86,7 +86,7 @@ export let recipes  = [
     preparationTime: "45 minutes",
     dietaryRestrictions: ["Shellfish allergy"],
     description: "Japanese sushi rolls with vinegared rice, seaweed, fresh fish, and vegetables. Served with soy sauce, it's a staple of Japanese cuisine.",
-    rating: 4.5,
+    rating: 4,
     foodId: `food5`,
     addedToFav: false
   },
@@ -121,7 +121,7 @@ export let recipes  = [
     preparationTime: "40 minutes",
     dietaryRestrictions: ["Nut allergy"],
     description: "Thai stir-fried noodles with shrimp, tofu, bean sprouts, and peanuts in a tangy tamarind sauce. A flavorful and popular Thai dish.",
-    rating: 4.5,
+    rating: 4,
     foodId: `food7`,
     addedToFav: false
   },
@@ -176,7 +176,7 @@ export let recipes  = [
     preparationTime: "5 minutes",
     dietaryRestrictions: ["Alcohol-free"],
     description: "A classic Mexican cocktail made with tequila, lime juice, and triple sec, served over ice with a salted rim. Refreshing and tangy.",
-    rating: 4.5,
+    rating: 4,
     foodId: `food10`,
     addedToFav: false
   },

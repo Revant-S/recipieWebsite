@@ -13,9 +13,9 @@ export function populateSelectOptions(array, domElement) {
 
 export function createFlipCard(
   frontTitle,
-  frontContent,
   backTitle,
-  backContent
+  backContent,
+  foodId
 ) {
   let recipes = getAllRecipies();
   // Create main container
@@ -32,12 +32,15 @@ export function createFlipCard(
 
   const frontH1 = document.createElement("h1");
   frontH1.textContent = frontTitle;
-
-  const frontP = document.createElement("p");
-  frontP.textContent = frontContent;
-
+  console.log(foodId);
+  const image = document.createElement("img");
+  image.src = `./images/food/${foodId}.jpg`
+  image.classList.add("cardImage")
+  const imageDiv = document.createElement("div")
+  imageDiv.classList.add("imageDivClass")
+  imageDiv.appendChild(image)
   theFront.appendChild(frontH1);
-  theFront.appendChild(frontP);
+  theFront.appendChild(imageDiv);
 
   // Create back of card
   const theBack = document.createElement("div");
@@ -53,6 +56,7 @@ export function createFlipCard(
   btn.textContent = "Show Process";
   btn.href = "./procedure.html";
   btn.id = frontTitle;
+  btn.classList.add("cardBtn")
   btn.addEventListener("click", (event) => {
     const recipie = event.target.id;
     const recipieReq = recipes.filter((element) => {
@@ -74,11 +78,12 @@ export function createFlipCard(
 export function populateDisplay(array, displayElement) {
 
   array.forEach((element) => {
+    console.log(element.foodId);
     const card = createFlipCard(
       element.name,
-      "IMAGE",
       "Short Description",
-      element.description
+      element.description,
+      element.foodId
     );
     displayElement.appendChild(card);
   });

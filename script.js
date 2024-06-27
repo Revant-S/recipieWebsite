@@ -50,17 +50,20 @@ function createSelectedItemDiv(ingredient) {
 
 function createNavBar() {
   navBar.innerHTML = "";
-  navBar.innerHTML = `<h2>Recipies</h3>
+  navBar.innerHTML = `<div class = "logo"><div id = "pic"></div><div class = "divHead"><h2>Recipies</h3></div></div>
         <div class="navBarOptions">
-            <div class="navElements" id = "about">About</div>
-        <div class="navElements" id = "publish">Publish</div>
-        <div class="navElements" id = "favourite">Favourite</div> 
-        <div class="navElements" id = "filter">Filter</div> 
+        <div class="navElements" id = "Home"><div class = "iconsvg"></div>Home</div>
+        <div class="navElements" id = "about"><div class = "iconsvg"></div>About</div>
+        <div class="navElements" id = "publish"><div class = "iconsvg"></div>Publish</div>
+        <div class="navElements" id = "favourite"><div class = "iconsvg"></div>Favourite</div> 
+        <div class="navElements" id = "filter"><div class = "iconsvg"></div>Filter</div> 
         </div>`;
 }
 
 function navBarEventListners() {
-  document.getElementById("about").addEventListener("click", () => {});
+  document.getElementById("Home").addEventListener("click", () => {
+    window.location.href = "/index.html"
+  });
   document.getElementById("publish").addEventListener("click", () => {
     window.location.href = "/publish.html";
   });

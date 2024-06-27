@@ -15,7 +15,7 @@ export function renderTheProcedure(recipe) {
             <div id="prepTime">Preparation Time : ${
               recipe.preparationTime
             }</div>
-            <div id = "imageDiv"><img id = "foodImg" src = "./images/food/hamburgur.jpg"></img></div>
+            <div id = "imageDiv"><img class = "foodImg" src = "./images/food/${recipe.foodId}.jpg"></img></div>
             <div id="ingridients">
                 <h3>Ingridients</h3>
                 ${getUlList(recipe.ingredients).outerHTML}
