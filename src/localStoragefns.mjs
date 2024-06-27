@@ -1,36 +1,69 @@
 import { recipes } from "./recipies.mjs";
 
-export function updateFavouriteArray({recipie, id}) {
-    let favArraystr = localStorage.getItem("favourites");
-    let recipes = getAllRecipies(); 
-    let favArray
-    if (!favArraystr) {
-        favArray = [];
-    }
-    else{
-        favArray = JSON.parse(favArraystr)
-    }
-    if (recipie.addedToFav) {
-        favArray.push(recipie);
-    }else {
-        const index = favArray.indexOf(recipie)
-        favArray.splice(index , 1)
-    }
-    localStorage.setItem("favourites" , JSON.stringify(favArray));
-    let index = recipes.findIndex(r => r.foodId === id);
+export function updateFavouriteArray({ recipie, id }) {
+  const loggedInUser = localStorage.getItem("LoggedInUser");
+  if (!loggedInUser) {
+    console.error("User is not logged in.");
+    return;
+  }
+
+  let favArrayStr = localStorage.getItem("favourites");
+  let favArray;
+  if (!favArrayStr) {
+    favArray = [];
+  } else {
+    favArray = JSON.parse(favArrayStr);
+  }
+
+  let userFavourites = favArray.find((item) => item.userName === loggedInUser);
+  if (!userFavourites) {
+    userFavourites = { userName: loggedInUser, favouritesArray: [] };
+    favArray.push(userFavourites);
+  }
+
+  if (recipie.addedToFav) {
+    userFavourites.favouritesArray.push(recipie);
+  } else {
+    const index = userFavourites.favouritesArray.findIndex((fav) => fav.foodId === recipie.foodId);
     if (index !== -1) {
-        recipes[index] = recipie;
-    } else {
-        console.error(`Recipe with foodId ${id} not found.`);
+      userFavourites.favouritesArray.splice(index, 1);
     }
-    saveUpdatedRecipie({updatedRecipie : recipes})
+  }
+
+  localStorage.setItem("favourites", JSON.stringify(favArray));
+
+  let recipes = getAllRecipies();
+  let index = recipes.findIndex((r) => r.foodId === id);
+  if (index !== -1) {
+    recipes[index] = recipie;
+  } else {
+    console.error(`Recipe with foodId ${id} not found.`);
+  }
+  saveUpdatedRecipie({ updatedRecipie: recipes });
 }
 
+
 export function getFavouriteArray() {
-    const arrayStr = localStorage.getItem("favourites")
-    if (!arrayStr) {return null}
-    return JSON.parse(arrayStr)
-}
+    const loggedInUser = localStorage.getItem("LoggedInUser");
+    if (!loggedInUser) {
+      console.error("User is not logged in.");
+      return null;
+    }
+  
+    const favArrayStr = localStorage.getItem("favourites");
+    if (!favArrayStr) {
+      return null;
+    }
+  
+    const favArray = JSON.parse(favArrayStr);
+    const userFavourites = favArray.find((item) => item.userName === loggedInUser);
+    if (!userFavourites) {
+      return null;
+    }
+  
+    return userFavourites.favouritesArray;
+  }
+  
 
 export function getAllRecipies() {
     let Allrecipies  = localStorage.getItem("Allrecipies")

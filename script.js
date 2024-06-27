@@ -1,14 +1,27 @@
-import { buildStars, getStars, handleLikeBtn, populateDisplay, populateSelectOptions, starEventListners } from "./src/domUtils.mjs";
+import {
+  buildStars,
+  getStars,
+  handleLikeBtn,
+  populateDisplay,
+  populateSelectOptions,
+  starEventListners,
+} from "./src/domUtils.mjs";
 import { renderTheProcedure } from "./src/procedure.mjs";
-import { getThankYouMessage, getTheValues, recipieForm } from "./src/publishPageFunctions.mjs";
+import {
+  getThankYouMessage,
+  getTheValues,
+  recipieForm,
+} from "./src/publishPageFunctions.mjs";
 import { filterByIngridients } from "./utils/general.mjs";
 import { getName } from "./utils/url.mjs";
 import { addOrRemove, populateFav } from "./src/favourites.mjs";
 import { getAllIngridients, getAllRecipies } from "./src/localStoragefns.mjs";
 import { populateFilterDisplay } from "./src/filter.mjs";
+import { login, signup } from "./src/signup.mjs";
 export const select = document.getElementById("ingridentsSelect");
 export const selectedItemsContainer = document.getElementById("selectedItems");
-export const recipieDisplay = document.getElementsByClassName("recipiesDisplay")[0];
+export const recipieDisplay =
+  document.getElementsByClassName("recipiesDisplay")[0];
 export const displaySpace = document.getElementById("displaySpace");
 const navBar = document.getElementsByClassName("navBar")[0];
 let selectedIngridients = [];
@@ -29,7 +42,7 @@ function createSelectedItemDiv(ingredient) {
     const elementIndex = selectedIngridients.indexOf(ingredient);
     selectedIngridients.splice(elementIndex, 1);
     let filteredArray = filterByIngridients(selectedIngridients);
-    recipieDisplay.innerHTML = ""
+    recipieDisplay.innerHTML = "";
     populateDisplay(filteredArray, recipieDisplay);
   });
   return itemDiv;
@@ -45,20 +58,51 @@ function createNavBar() {
         <div class="navElements" id = "filter">Filter</div> 
         </div>`;
 }
-createNavBar();
-navBarEventListners();
+
 function navBarEventListners() {
   document.getElementById("about").addEventListener("click", () => {});
   document.getElementById("publish").addEventListener("click", () => {
     window.location.href = "/publish.html";
   });
   document.getElementById("favourite").addEventListener("click", () => {
-    window.location.href = "/favourites.html"
+    window.location.href = "/favourites.html";
   });
   document.getElementById("filter").addEventListener("click", () => {
-    window.location.href = "/filter.html"
+    window.location.href = "/filter.html";
   });
 }
+
+
+
+if (window.location.pathname.indexOf("/signup") != -1) {
+  document.getElementById("signupBtn").addEventListener("click" , (e)=>{
+    e.preventDefault()
+    signup()
+  })
+
+
+}  else if (window.location.pathname.indexOf("/login") != -1) {
+  document.getElementById("loginBtn").addEventListener("click" , (e)=>{
+    e.preventDefault()
+   login()
+  })
+    
+}
+ 
+function checkLoggedInUser() {
+  if (window.location.pathname === "/login.html" || window.location.pathname === "/signup.html") {
+    return; 
+  }
+  if (!localStorage.getItem("LoggedInUser")) {
+    alert("Please Login For Better Experience");
+    window.location.href = "/login.html";
+  }
+}
+
+
+checkLoggedInUser();
+createNavBar();
+navBarEventListners()
 
 if (window.location.pathname == "/index.html") {
   select.addEventListener("change", (event) => {
@@ -75,35 +119,34 @@ if (window.location.pathname == "/index.html") {
       populateDisplay(filteredArray, recipieDisplay);
     }
   });
-  let ingridents = getAllIngridients()
+  let ingridents = getAllIngridients();
   populateSelectOptions(ingridents, select);
-  let recipes = getAllRecipies()
+  let recipes = getAllRecipies();
   populateDisplay(recipes, recipieDisplay);
 } else if (window.location.pathname.indexOf("/process") != -1) {
   const item = getName(window.location.search);
-  let recipes = getAllRecipies()
+  let recipes = getAllRecipies();
   const obj = recipes.find((recipie) => recipie.name === item);
   renderTheProcedure(obj);
-  document.querySelector(".favouriteBtn").addEventListener("click",(e)=>{
+  document.querySelector(".favouriteBtn").addEventListener("click", (e) => {
     const id = e.target.id;
-    addOrRemove(id.slice(3,id.length));
-    handleLikeBtn(id.slice(3,id.length))
-  })
+    addOrRemove(id.slice(3, id.length));
+    handleLikeBtn(id.slice(3, id.length));
+  });
   console.log("HELLO");
   starEventListners();
 } else if (window.location.pathname.indexOf("/publish") != -1) {
   let requiredHtml = recipieForm();
   document.getElementsByClassName("masterDiv")[0].innerHTML = requiredHtml;
   document.getElementById("submitRecipie").addEventListener("click", () => {
-    const  p = getTheValues();
+    const p = getTheValues();
     if (p.ok) {
-      document.getElementsByClassName("masterDiv")[0].innerHTML = getThankYouMessage();
+      document.getElementsByClassName("masterDiv")[0].innerHTML =
+        getThankYouMessage();
     }
   });
-
-}else if (window.location.pathname.indexOf("/favourites") != -1) {
-  populateFav()
-}
-else if (window.location.pathname.indexOf("/filter") != -1) {
+} else if (window.location.pathname.indexOf("/favourites") != -1) {
+  populateFav();
+} else if (window.location.pathname.indexOf("/filter") != -1) {
   populateFilterDisplay();
 }
