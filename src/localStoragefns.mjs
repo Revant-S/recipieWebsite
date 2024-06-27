@@ -101,7 +101,7 @@ export function getAlldietaryRestrictions(params) {
    return dietaryRestrictionss;  
 }
 
-export function getAllrating(params) {
+export function getAllrating() {
     const recipies = getAllRecipies();
     let set = new Set();
     recipies.forEach(recipie => {

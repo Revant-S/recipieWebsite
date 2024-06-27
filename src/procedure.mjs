@@ -3,7 +3,7 @@ import { buildStars, getUlList } from "./domUtils.mjs";
 import { getHeart } from "./favourites.mjs";
 
 export function renderTheProcedure(recipe) {
-  console.log(recipe);
+
   displaySpace.innerHTML = "";
   displaySpace.innerHTML = `
      <div class = "addFav"></div><div class="recipieName"><h1 id="heading">${

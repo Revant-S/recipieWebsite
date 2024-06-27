@@ -1,4 +1,4 @@
-import { buildStars, getStars, handleLikeBtn, populateDisplay, populateSelectOptions } from "./src/domUtils.mjs";
+import { buildStars, getStars, handleLikeBtn, populateDisplay, populateSelectOptions, starEventListners } from "./src/domUtils.mjs";
 import { renderTheProcedure } from "./src/procedure.mjs";
 import { getThankYouMessage, getTheValues, recipieForm } from "./src/publishPageFunctions.mjs";
 import { filterByIngridients } from "./utils/general.mjs";
@@ -89,6 +89,8 @@ if (window.location.pathname == "/index.html") {
     addOrRemove(id.slice(3,id.length));
     handleLikeBtn(id.slice(3,id.length))
   })
+  console.log("HELLO");
+  starEventListners();
 } else if (window.location.pathname.indexOf("/publish") != -1) {
   let requiredHtml = recipieForm();
   document.getElementsByClassName("masterDiv")[0].innerHTML = requiredHtml;
@@ -98,6 +100,7 @@ if (window.location.pathname == "/index.html") {
       document.getElementsByClassName("masterDiv")[0].innerHTML = getThankYouMessage();
     }
   });
+
 }else if (window.location.pathname.indexOf("/favourites") != -1) {
   populateFav()
 }

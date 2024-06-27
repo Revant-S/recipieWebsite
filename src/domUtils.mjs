@@ -1,4 +1,4 @@
-import { getAllRecipies } from "./localStoragefns.mjs";
+import { getAllRecipies, saveUpdatedRecipie } from "./localStoragefns.mjs";
 import { renderTheProcedure } from "./procedure.mjs";
 
 export function populateSelectOptions(array, domElement) {
@@ -121,26 +121,24 @@ export function getStars(food) {
 
 export function buildStars(food) {
   let  stars = getStars(food);
-  stars = starEventListners(stars)
   const starDiv = document.createElement("div")
   stars.forEach(star =>starDiv.appendChild(star))
   return starDiv
 }
-export function starEventListners(stars) {
+export function starEventListners() {
   const recipes = getAllRecipies()
+  const stars = document.querySelectorAll(".star")
   for (let index = 0; index < stars.length; index++) {
-    console.log(stars[index]);
     stars[index].addEventListener("click", (e) => {
-      console.log("STAR CLICKED");
       let starNumber = parseInt(e.target.id);
       const foodId = e.target.id.slice(5, e.target.id.length);
       const food = recipes.find((food) => food.foodId === foodId)
       recipes.find((food) => food.foodId === foodId).rating = starNumber;
-      document.getElementById("reviews").innerHTML = "";
+      saveUpdatedRecipie({updatedRecipie : recipes})
       document.getElementById("reviews").innerHTML = buildStars(food).outerHTML
+      starEventListners()
     });
   }
-  return stars
 }
 
 export function handleLikeBtn(foodId) {
