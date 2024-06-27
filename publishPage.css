@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    height: 100vh;
+    width: 90%;
+    margin-left: 2%;
+}
+
+.masterDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+.masterDiv h2
+{
+    text-align: center;
+    color: #f39c12;
+}
+label {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    background-color: #333;
+    border: 1px solid #555;
+    color: #fff;
+    border-radius: 5px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    background-color: #333;
+    border: 1px solid #555;
+    color: #fff;
+    border-radius: 5px;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+#submitRecipie {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+    margin-bottom: 10%;
+}
+
+#submitRecipie:hover {
+    background-color: #0056b3;
+}
+
+#thankYou {
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    border: 2px solid #0056b3;
+    background-color: #e8e8e8; 
+    padding: 5%;
+    transform: perspective(1000%) rotateX(1deg) rotateY(-1deg) scale(1.1);
+    transition: transform 0.5s ease;
+    box-shadow: 0 5% 10% rgba(0, 0, 0, 0.2);
+}
+
+#thankYou:hover {
+    transform: perspective(1000%) rotateX(0.5deg) rotateY(-0.5deg) scale(1.1);
+    box-shadow: 0 10% 20% rgba(0, 0, 0, 0.3);
+}
+
+#thankYou h2 {
+    padding: 2%;
+}
+
+#thankYou p {
+    color: black;
+    font-size: 1.6vw; /* Adjust font size using viewport width */
+    line-height: 1.5;
+}
+
