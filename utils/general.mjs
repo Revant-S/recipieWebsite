@@ -1,5 +1,4 @@
 import { getAllRecipies } from "../src/localStoragefns.mjs";
-import { Restrictions, cuisine, ingridents, recipes, time } from "../src/recipies.mjs";
 
 export function filterByIngridients(selectedIngredients) {
     let recipes = getAllRecipies()
