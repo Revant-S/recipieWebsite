@@ -64,15 +64,5 @@ export function getTheValues() {
   });
   return { ok: true };
 }
-export function afterSubission() {}
-function checkValidity({
-  name,
-  cuisine,
-  ingredients,
-  preparationTime,
-  dietaryRestrictions,
-  processToPrepare,
-  description,
-}) {
-  return true;
-}
+
+
