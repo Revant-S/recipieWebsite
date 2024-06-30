@@ -26,13 +26,11 @@ Recipe Suggestions:
 To run the project locally, follow these steps:
 
     Clone the repository:
+    git clone https://github.com/Revant-S/recipieWebsite.git
 
-    bash
+Naviagte to the folder where it is cloned
 
-git clone <repository-url>
-cd recipe-app
-
-Open the project:
+### Open the project:
 
 Navigate to the project folder and open signup.html or login.html using a live server in your preferred browser.
 Using a live server is recommended due to potential CORS policy issues that may occur when fetching data locally.
