@@ -135,7 +135,7 @@ if (window.location.pathname == "/index.html") {
 } else if (window.location.pathname.indexOf("/publish") != -1) {
   let requiredHtml = recipieForm();
   document.getElementsByClassName("masterDiv")[0].innerHTML = requiredHtml;
-  document.getElementById("submitRecipie").addEventListener("click", () => {
+  document.getElementById("submitRecipe").addEventListener("click", () => {
     const p = getTheValues();
     if (p.ok) {
       document.getElementsByClassName("masterDiv")[0].innerHTML =
