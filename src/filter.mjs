@@ -142,7 +142,7 @@ export function populateFilterDisplay() {
   submitBtn.classList.add("submitBtn");
   submitBtn.innerText = "Find Recipe";
   submitBtn.addEventListener("click", () => {
-    filterDisplay.classList.add("hidden")
+    filterDisplay.classList.add("hidden");
     populateDisplayOnFilter();
   });
   submitBtnDiv.appendChild(submitBtn);
@@ -171,7 +171,14 @@ function getFilterDetails() {
           filterObject.Rating.push(parseInt(element.value));
           break;
         case "preparationTime":
-          filterObject.Preparation_Time.push(element.value);
+          console.log(element.value.substring(element.value.length -5 , element.value.length));
+          console.log(typeof(element.value));
+          if (element.value.substring(element.value.length -4 , element.value.length) === "hour" || element.value.substring(element.value.length -5 , element.value.length) === "hours" ) {
+            filterObject.Preparation_Time.push(parseInt(element.value)*60);
+          }else{
+            filterObject.Preparation_Time.push(parseInt(element.value));
+          }
+          console.log(filterObject.Preparation_Time);
           break;
         default:
           break;
@@ -184,27 +191,53 @@ function getFilterDetails() {
 
 export function getfilterRecipes() {
   const filters = getFilterDetails();
-  const recipes = getAllRecipies();
-  const filteredRecipes = recipes.filter((recipe) => {
-    return (
-      (filters.Cuisine.length === 0 ||
-        filters.Cuisine.includes(recipe.cuisine)) &&
-      (filters.DietaryRestrictions.length === 0 ||
-        filters.DietaryRestrictions.some((restriction) =>
-          recipe.dietaryRestrictions.includes(restriction)
-        )) &&
-      (filters.Rating.length === 0 || filters.Rating.includes(recipe.rating)) &&
-      (filters.Preparation_Time.length === 0 ||
-        filters.Preparation_Time.includes(recipe.preparationTime))
-    );
-  });
-  return filteredRecipes
+  console.log(filters);
+  let recipes = getAllRecipies();
+  if (filters.Cuisine.length !== 0) {
+    recipes = recipes.filter((recipe) => {
+      return filters.Cuisine.includes(recipe.cuisine);
+    });
+  }
+  console.log(filters.Preparation_Time.length !== 0);
+  if (filters.Preparation_Time.length !== 0) {
+    recipes = recipes.filter((recipe) => {
+      let include = false;
+      filters.Preparation_Time.forEach((element) => {
+        console.log("JBODYUIGOIUDYG");
+        console.log(parseInt(element));
+        console.log(recipe.preparationTime);
+        if (parseInt(element) >= parseInt(recipe.preparationTime)) {
+          include = true;
+        }
+      });
+      return include;
+    });
+  }
+  if (filters.Rating.length !== 0) {
+    recipes = recipes.filter((recipe) => {
+      return filters.Rating.includes(recipe.rating)
+    });
+  }
+  if (filters.DietaryRestrictions.length !== 0) {
+    recipes = recipes.filter((recipe) => {
+      let include = true
+      recipe.dietaryRestrictions.forEach(res =>{
+        if (filters.DietaryRestrictions.includes(res)) {
+          include = false
+        }
+      })
+      return include
+    });
+  }
+
+  return recipes
+
 }
 
-
 export function populateDisplayOnFilter() {
-    const recipiesReq = getfilterRecipes()
-    console.log(recipiesReq);
-    recipieDisplay.innerHTML = ""
-    populateDisplay(recipiesReq , recipieDisplay);
+  const recipiesReq = getfilterRecipes();
+  console.log(recipiesReq);
+  recipieDisplay.innerHTML = "";
+  // console.log("Process");
+  populateDisplay(recipiesReq, recipieDisplay);
 }
