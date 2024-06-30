@@ -16,7 +16,9 @@ function setupTextToSpeech() {
   // Initialize voice options
   initializeVoices();
   // Event listener for play/pause button
-  speechBtn.addEventListener("click", toggleSpeech);
+  speechBtn.addEventListener("click", ()=>{
+    toggleSpeech()
+  });
   // Event listener for voices changed
   synth.addEventListener("voiceschanged", initializeVoices);
   // Event listener for tab visibility change
@@ -43,10 +45,17 @@ function pauseSpeech() {
 
 function startSpeech() {
   const speechBtn = document.getElementById("voicePlay");
+  speechBtn.innerText = "Pause"
   const processText = document.getElementById("processToRead").innerText.trim();
-  textChunks = processText.split('\n').filter(chunk => chunk.trim() !== '');
+  textChunks = chunkText(processText); 
   currentChunkIndex = 0;
   speakNextChunk();
+}
+
+function chunkText(text) {
+  let chunks = [];
+  chunks = text.split(".")
+  return chunks;
 }
 
 function speakNextChunk() {
@@ -63,11 +72,8 @@ function speakNextChunk() {
 
     synth.speak(utterance);
     isPlaying = true;
-    const speechBtn = document.getElementById("voicePlay");
-    speechBtn.innerText = "Pause";
   } else {
     isPlaying = false;
-    const speechBtn = document.getElementById("voicePlay");
     speechBtn.innerText = "Play";
   }
 }
@@ -76,9 +82,11 @@ function toggleSpeech() {
   const speechBtn = document.getElementById("voicePlay");
   if (!isPlaying) {
     startSpeech();
+    speechBtn.innerText = "Pause"
   } else {
     if (!isPaused) {
       pauseSpeech();
+      speechBtn.innerText = "Resume"
     } else {
       synth.resume();
       isPaused = false;
@@ -94,7 +102,6 @@ function handleVisibilityChange() {
     isPlaying = false;
     isPaused = false;
     currentChunkIndex = 0;
-    const speechBtn = document.getElementById("voicePlay");
     speechBtn.innerText = "Play";
   }
 }
@@ -122,7 +129,7 @@ export function renderTheProcedure(recipe) {
           <button id="voicePlay">Play</button>
         </div>
       </div>
-      <div id="processToRead">${getUlList(recipe.processToPrepare).outerHTML}</div> <!-- Procedure text -->
+      <div id="processToRead"><p>${recipe.processToPrepare}</p></div> <!-- Procedure text -->
     </div>
     <div id="dietaryRestrictions">
       <h3>Dietary Restrictions</h3>
@@ -132,6 +139,5 @@ export function renderTheProcedure(recipe) {
       ${buildStars(recipe).outerHTML}
     </div>
   `;
-  // Initialize voice options and text-to-speech functionality
   setupTextToSpeech();
 }

@@ -69,12 +69,12 @@ export function getTheValues() {
   return { ok: true };
 }
 
-// Add this function to set up the form submission handler
+
 export function setupFormHandler() {
   document.getElementById('recipeForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent default submission
+    e.preventDefault(); 
 
-    // Perform custom validation
+    
     const inputs = this.querySelectorAll('input[required], textarea[required]');
     let isValid = true;
 
@@ -86,7 +86,7 @@ export function setupFormHandler() {
         input.classList.remove('error');
       }
 
-      // Additional length checks for textareas
+
       if (input.tagName === 'TEXTAREA') {
         const minLength = input.id === 'Ingredients' || input.id === 'DietRestrictions' ? 10 : 40;
         if (input.value.trim().length < minLength) {
