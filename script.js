@@ -1,6 +1,4 @@
 import {
-  buildStars,
-  getStars,
   handleLikeBtn,
   populateDisplay,
   populateSelectOptions,
@@ -53,7 +51,6 @@ function createNavBar() {
   navBar.innerHTML = `<div class = "logo"><div class = "iconsvg"><image src = "./images/icons/logo.jpg"></image></div><div id = "pic"></div><div class = "divHead"><h2>Recipies</h3></div></div>
         <div class="navBarOptions">
         <div class="navElements" id = "Home"><div class = "iconsvg"><image src = "./images/icons/home.svg"></image></div>Home</div>
-        <div class="navElements" id = "about"><div class = "iconsvg"><image src = "./images/icons/about.svg"></image></div>About</div>
         <div class="navElements" id = "publish"><div class = "iconsvg"><image src = "./images/icons/publish.svg"></image></div>Publish</div>
         <div class="navElements" id = "favourite"><div class = "iconsvg"><image src = "./images/icons/fav.svg"></image></div>Favourite</div> 
         <div class="navElements" id = "filter"><div class = "iconsvg"><image src = "./images/icons/filter.svg"></image></div>Filter</div> 
