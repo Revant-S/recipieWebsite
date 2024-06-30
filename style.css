@@ -1,19 +1,23 @@
 * {
-    margin: 0px;
-    padding: 0px;
-    /* border: 2px solid white; */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
 }
 
 body {
     height: 100vh;
     width: 90%;
     margin-left: 2%;
+    background-image: url("./images/background/back.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .heading {
     text-align: center;
     padding: 2%;
-
 }
 
 .masterDiv {
@@ -21,55 +25,55 @@ body {
     justify-content: space-between;
     flex-direction: column;
     margin-right: 4%;
-
 }
 
 .navBar {
     position: sticky;
+    top: 0;
     height: 15vh;
-    padding: 2%;
+    padding: 1%;
     display: flex;
+    align-items: center;
+    border-radius: 5%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #f0f0f0;
     justify-content: space-evenly;
+    z-index: 10; 
+    margin-bottom: 2%;
 }
 
 .navBarOptions {
     display: flex;
-    justify-content: space-evenly;
-    width: 35%;
-    gap: 0px;
-    border: 2px solid white;
-    transition: 0.5s;
-}
-.logo{
-    display: flex;
-    justify-content: center;
-    align-self: flex-start;
-}
-.displaySpace {
-    border: 2px solid black;
-    flex-grow: 2;
+    justify-content:flex-end;
+    width: fit-content;
+    gap: 0;
     width: 100%;
-    padding: 10%;
-    background-image: url("./images/icons/logo.jpg");
- 
+    align-items: center;
+    height: 10%;
+    transition: 0.5s;
 }
 
 .navElements {
     display: flex;
-    padding: 2%;
-    justify-content: center;
     align-items: center;
-    border: 2px solid black;
+    justify-content: center;
+    padding: 2%;
+    gap: 4%;
     margin-top: 2%;
+    height: 5%;
     margin-bottom: 2%;
     text-align: center;
+    border: 2px solid black;
     border-radius: 5%;
-    transition: 0.6s;
+    transition: 0.3s linear;
+    cursor: pointer;
 }
 
 .navElements:hover {
-    background-color: rgb(255, 255, 255);
-    color: black;
+    border: 5px solid white;
+}
+.navElements:hover .iconsvg image {
+    fill: #000000;
 }
 
 .adjust {
@@ -84,16 +88,14 @@ body {
     border-radius: 5px;
     padding: 1%;
     font-size: 16px;
-    color: #333;
     cursor: pointer;
     width: 50%;
     margin-top: 2%;
     margin-left: 25%;
     background-repeat: no-repeat;
-    background-position: calc(100% - 10px) center;
     border-radius: 2%;
     transition: 1s;
-    z-index: 2;
+    z-index: 3;
 }
 
 #ingridientsLabel {
@@ -113,9 +115,7 @@ body {
 #ingridentsSelect:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-
 }
-
 
 #ingridentsSelect option {
     padding: 10px;
@@ -130,7 +130,6 @@ body {
     background-color: #007bff;
     color: white;
 }
-
 
 #selectedItems {
     display: flex;
@@ -234,9 +233,9 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
-
 }
-.cardBtn{
+
+.cardBtn {
     font-size: large;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     padding: 2%;
@@ -244,13 +243,13 @@ body {
     color: #fafafa;
     transition: 1s;
 }
-.cardBtn:hover{
+
+.cardBtn:hover {
     background-color: #2d42e1;
     cursor: pointer;
-
 }
+
 .cardImage {
-    position: relative;
     width: 90%;
     margin-bottom: 2%;
     object-fit: cover;
@@ -262,29 +261,41 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     padding: 5%;
-
 }
-#logoimg{
+
+#logoimg {
     height: 10vh;
 }
-.divHead{
+
+.divHead {
     display: flex;
     align-items: center;
     margin: 3%;
 }
-.iconsvg {/* Adjust the height as per your design */
-    display: inline-flex; /* Use flexbox to align center */
-    align-items: center; /* Vertically center align */
-    justify-content: center; /* Horizontally center align */
+
+.iconsvg {
+    height: 5vh; 
+    width: 5vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.iconsvg svg {
-    width: 100%; /* Ensure SVG fills its container */
-    height: 100%; /* Ensure SVG fills its container */
-    fill: currentColor; /* Example: Use current text color as SVG fill */
+.iconsvg img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
+.logo {
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    padding: 2%;
+}
 
-#pic{
-
+.logo .iconsvg {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
 }

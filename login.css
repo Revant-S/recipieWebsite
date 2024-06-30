@@ -9,12 +9,18 @@ body {
     background-color: #1e272e;
     color: #fff;
     padding: 2%;
+    background-image: url("./images/background/back.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
 }
 
 .masterDiv {
     margin: 0 auto;
-    max-width: 40%; 
-    background-color: #2d3436;
+    max-width: 40%;
+    background-color: rgba(45, 52, 54, 0.1);
     box-shadow: 0 0 1.5%;
     border-radius: 3%;
     overflow: hidden;
@@ -24,7 +30,10 @@ body {
     transform: perspective(1500px) rotateX(-5deg);
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
+    backdrop-filter: blur(20px);
+
 }
 
 .heading {
@@ -35,10 +44,11 @@ body {
     border-bottom: 1px solid #34495e;
     margin-bottom: 4%;
     width: 100%;
+    border-radius: 5%;
 }
 
 .formContainer {
-    padding: 2%; 
+    padding: 2%;
     background-color: #34495e;
     border-radius: 3%;
     width: 100%;
@@ -60,9 +70,9 @@ body {
 
 .formContainer input[type="text"],
 .formContainer input[type="password"] {
-    width: 90%; 
-    padding: 5%; 
-    margin-bottom: 3%; 
+    width: 90%;
+    padding: 5%;
+    margin-bottom: 3%;
     margin-bottom: 25%;
     border: none;
     border-radius: 1.5%;
@@ -71,7 +81,7 @@ body {
 }
 
 .formContainer button[type="submit"] {
-    width: 90%; 
+    width: 90%;
     border: none;
     padding: 5%;
     border-radius: 1.5%;

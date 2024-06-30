@@ -50,19 +50,19 @@ function createSelectedItemDiv(ingredient) {
 
 function createNavBar() {
   navBar.innerHTML = "";
-  navBar.innerHTML = `<div class = "logo"><div id = "pic"></div><div class = "divHead"><h2>Recipies</h3></div></div>
+  navBar.innerHTML = `<div class = "logo"><div class = "iconsvg"><image src = "./images/icons/logo.jpg"></image></div><div id = "pic"></div><div class = "divHead"><h2>Recipies</h3></div></div>
         <div class="navBarOptions">
-        <div class="navElements" id = "Home"><div class = "iconsvg"></div>Home</div>
-        <div class="navElements" id = "about"><div class = "iconsvg"></div>About</div>
-        <div class="navElements" id = "publish"><div class = "iconsvg"></div>Publish</div>
-        <div class="navElements" id = "favourite"><div class = "iconsvg"></div>Favourite</div> 
-        <div class="navElements" id = "filter"><div class = "iconsvg"></div>Filter</div> 
+        <div class="navElements" id = "Home"><div class = "iconsvg"><image src = "./images/icons/home.svg"></image></div>Home</div>
+        <div class="navElements" id = "about"><div class = "iconsvg"><image src = "./images/icons/about.svg"></image></div>About</div>
+        <div class="navElements" id = "publish"><div class = "iconsvg"><image src = "./images/icons/publish.svg"></image></div>Publish</div>
+        <div class="navElements" id = "favourite"><div class = "iconsvg"><image src = "./images/icons/fav.svg"></image></div>Favourite</div> 
+        <div class="navElements" id = "filter"><div class = "iconsvg"><image src = "./images/icons/filter.svg"></image></div>Filter</div> 
         </div>`;
 }
 
 function navBarEventListners() {
   document.getElementById("Home").addEventListener("click", () => {
-    window.location.href = "/index.html"
+    window.location.href = "/index.html";
   });
   document.getElementById("publish").addEventListener("click", () => {
     window.location.href = "/publish.html";
@@ -75,26 +75,24 @@ function navBarEventListners() {
   });
 }
 
-
-
 if (window.location.pathname.indexOf("/signup") != -1) {
-  document.getElementById("signupBtn").addEventListener("click" , (e)=>{
-    e.preventDefault()
-    signup()
-  })
-
-
-}  else if (window.location.pathname.indexOf("/login") != -1) {
-  document.getElementById("loginBtn").addEventListener("click" , (e)=>{
-    e.preventDefault()
-   login()
-  })
-    
+  document.getElementById("signupBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    signup();
+  });
+} else if (window.location.pathname.indexOf("/login") != -1) {
+  document.getElementById("loginBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    login();
+  });
 }
- 
+
 function checkLoggedInUser() {
-  if (window.location.pathname === "/login.html" || window.location.pathname === "/signup.html") {
-    return; 
+  if (
+    window.location.pathname === "/login.html" ||
+    window.location.pathname === "/signup.html"
+  ) {
+    return;
   }
   if (!localStorage.getItem("LoggedInUser")) {
     alert("Please Login For Better Experience");
@@ -102,10 +100,9 @@ function checkLoggedInUser() {
   }
 }
 
-
 checkLoggedInUser();
 createNavBar();
-navBarEventListners()
+navBarEventListners();
 
 if (window.location.pathname == "/index.html") {
   select.addEventListener("change", (event) => {
