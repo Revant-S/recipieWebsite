@@ -12,16 +12,16 @@ export function recipieForm() {
         <input type="text" id="prepTime" name="prepTime">
 
         <label for="Ingridients"> Ingridients</label>
-        <textarea name="Ingridients" id="Ingridients">Enter Here Separated With commas</textarea>
+        <textarea name="Ingridients" id="Ingridients" placeholder = "Enter Here Separated With commas"></textarea>
 
         <label for="Process"> Process</label>
-        <textarea name="Process" id="Process">Enter Here Separated With commas</textarea>
+        <textarea name="Process" id="Process" placeholder="Enter Here Separated With commas"></textarea>
 
         <label for="DietRestrictions"> Dietray Restrictions</label>
-        <textarea name="DietRestrictions" id="DietRestrictions">Enter Here Separated With commas</textarea>
+        <textarea name=" DietRestrictions" id="DietRestrictions" placeholder = "Enter Here Separated With commas"></textarea>
 
         <label for="description"> Short Description </label>
-        <textarea name="description" id="description">Please Enter a short description Of the Dish</textarea>
+        <textarea name="description" id="description" placeholder = "Please Enter a short description Of the Dish"></textarea>
         
 
         <input type="submit" id = "submitRecipie">`;
@@ -33,9 +33,8 @@ export function getThankYouMessage() {
             <p>
                 Thanks a bunch for sharing your awesome recipe with us! 🌟 We can't wait to try it out!
             </p>
-        </div>`
+        </div>`;
 }
-
 
 export function getTheValues() {
   console.log("called");
@@ -43,7 +42,9 @@ export function getTheValues() {
   const cuisine = document.getElementById("cuisine").value;
   const ingredients = document.getElementById("Ingridients").value.split(",");
   const preparationTime = document.getElementById("prepTime").value;
-  const dietaryRestrictions = document.getElementById("DietRestrictions").value.split(",");
+  const dietaryRestrictions = document
+    .getElementById("DietRestrictions")
+    .value.split(",");
   const processToPrepare = document.getElementById("Process").value.split(",");
   const description = document.getElementById("description").value;
   const p = checkValidity({
@@ -56,22 +57,23 @@ export function getTheValues() {
     description,
   });
   if (!p) {
-    return false
+    return false;
   }
-  addARecipie({recipieToBeAdded : {
-    name,
-    cuisine,
-    ingredients,
-    preparationTime,
-    dietaryRestrictions,
-    processToPrepare,
-    description,
-    rating : 0,
-    addedToFav : false,
-    foodId : getFoodId()
-  }})
-  return {ok : true}
-  
+  addARecipie({
+    recipieToBeAdded: {
+      name,
+      cuisine,
+      ingredients,
+      preparationTime,
+      dietaryRestrictions,
+      processToPrepare,
+      description,
+      rating: 0,
+      addedToFav: false,
+      foodId: getFoodId(),
+    },
+  });
+  return { ok: true };
 }
 export function afterSubission() {}
 function checkValidity({
@@ -83,5 +85,5 @@ function checkValidity({
   processToPrepare,
   description,
 }) {
-  return true
+  return true;
 }
