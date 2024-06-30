@@ -47,18 +47,7 @@ export function getTheValues() {
     .value.split(",");
   const processToPrepare = document.getElementById("Process").value.split(",");
   const description = document.getElementById("description").value;
-  const p = checkValidity({
-    name,
-    cuisine,
-    ingredients,
-    preparationTime,
-    dietaryRestrictions,
-    processToPrepare,
-    description,
-  });
-  if (!p) {
-    return false;
-  }
+
   addARecipie({
     recipieToBeAdded: {
       name,
