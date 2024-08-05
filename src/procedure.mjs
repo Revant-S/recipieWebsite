@@ -1,27 +1,26 @@
-// Import necessary functions and constants
 import { displaySpace } from "../script.js";
 import { buildStars, getUlList } from "./domUtils.mjs";
 import { getHeart } from "./favourites.mjs";
 
 let synth = window.speechSynthesis;
 let utterance = new SpeechSynthesisUtterance();
-let isPaused = false; // Track if speech is paused
-let isPlaying = false; // Track if speech is currently playing
+let isPaused = false;
+let isPlaying = false;
 let voiceList;
 let textChunks = [];
 let currentChunkIndex = 0;
 
 function setupTextToSpeech() {
   const speechBtn = document.getElementById("voicePlay");
-  // Initialize voice options
+
   initializeVoices();
-  // Event listener for play/pause button
-  speechBtn.addEventListener("click", ()=>{
-    toggleSpeech()
+
+  speechBtn.addEventListener("click", () => {
+    toggleSpeech();
   });
-  // Event listener for voices changed
+
   synth.addEventListener("voiceschanged", initializeVoices);
-  // Event listener for tab visibility change
+
   document.addEventListener("visibilitychange", handleVisibilityChange);
 }
 
@@ -45,16 +44,16 @@ function pauseSpeech() {
 
 function startSpeech() {
   const speechBtn = document.getElementById("voicePlay");
-  speechBtn.innerText = "Pause"
+  speechBtn.innerText = "Pause";
   const processText = document.getElementById("processToRead").innerText.trim();
-  textChunks = chunkText(processText); 
+  textChunks = chunkText(processText);
   currentChunkIndex = 0;
   speakNextChunk();
 }
 
 function chunkText(text) {
   let chunks = [];
-  chunks = text.split(".")
+  chunks = text.split(".");
   return chunks;
 }
 
@@ -63,8 +62,10 @@ function speakNextChunk() {
     const chunk = textChunks[currentChunkIndex];
     window.speechSynthesis.cancel();
     utterance = new SpeechSynthesisUtterance(chunk);
-    utterance.voice = synth.getVoices().find((voice) => voice.name === voiceList.value);
-    
+    utterance.voice = synth
+      .getVoices()
+      .find((voice) => voice.name === voiceList.value);
+
     utterance.onend = () => {
       currentChunkIndex++;
       speakNextChunk();
@@ -82,11 +83,11 @@ function toggleSpeech() {
   const speechBtn = document.getElementById("voicePlay");
   if (!isPlaying) {
     startSpeech();
-    speechBtn.innerText = "Pause"
+    speechBtn.innerText = "Pause";
   } else {
     if (!isPaused) {
       pauseSpeech();
-      speechBtn.innerText = "Resume"
+      speechBtn.innerText = "Resume";
     } else {
       synth.resume();
       isPaused = false;
@@ -112,11 +113,15 @@ export function renderTheProcedure(recipe) {
     <div class="addFav"></div>
     <div class="recipieName">
       <h1 id="heading">${recipe.name}</h1>
-      <img class="favouriteBtn" id="fav${recipe.foodId}" src="./images/icons/${getHeart(recipe.foodId)}.svg"></img>
+      <img class="favouriteBtn" id="fav${
+        recipe.foodId
+      }" src="./images/icons/${getHeart(recipe.foodId)}.svg"></img>
     </div>
     <div id="cuisine">cuisine: ${recipe.cuisine}</div>
     <div id="prepTime">Preparation Time: ${recipe.preparationTime}</div>
-    <div id="imageDiv"><img class="foodImg" src="./images/food/${recipe.foodId}.jpg"></img></div>
+    <div id="imageDiv"><img class="foodImg" src="./images/food/${
+      recipe.foodId
+    }.jpg"></img></div>
     <div id="ingredients">
       <h3>Ingredients</h3>
       ${getUlList(recipe.ingredients).outerHTML}
@@ -129,7 +134,9 @@ export function renderTheProcedure(recipe) {
           <button id="voicePlay">Play</button>
         </div>
       </div>
-      <div id="processToRead"><p>${recipe.processToPrepare}</p></div> <!-- Procedure text -->
+      <div id="processToRead"><p>${
+        recipe.processToPrepare
+      }</p></div> <!-- Procedure text -->
     </div>
     <div id="dietaryRestrictions">
       <h3>Dietary Restrictions</h3>
